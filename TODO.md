@@ -11,6 +11,9 @@ are add-ons to existing information/effort analyses, not replacements.
 - [x] Keep this repo CPU-first and predictor-only.
 - [x] Preserve row ids, child/session/age/corpus provenance, and empty-row
       diagnostics.
+- [x] Keep Git limited to code, tests, docs, Slurm scripts, tiny synthetic
+      fixtures, and manifest templates. Move real cleaned data and derived
+      predictor exports with `rsync`.
 - [x] Provide a Slurm script that `cd` to repo root and sets `PYTHONPATH=src`.
 - [ ] Add production manifests pointing to strict naturalistic child rows and
       any required CHAT morphology exports.
@@ -47,6 +50,15 @@ are add-ons to existing information/effort analyses, not replacements.
       failure modes on short child utterances are documented.
 - [ ] If parser dependencies are added, keep parser model/version/config in
       the audit output.
+
+## Real-Data Integration
+
+- [ ] Add PBM cleaned-data integration manifests using existing
+      `compute_surprisal_mila/data/{Brown,Manchester,Providence}/*/chi.csv`
+      as the first real-data test layer.
+- [ ] After synthetic and PBM integration tests pass, run full
+      strict-naturalistic predictor extraction only from data transferred to
+      Mila with `rsync`.
 
 ## Verification Commands
 
