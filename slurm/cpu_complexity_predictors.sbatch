@@ -17,3 +17,4 @@ PYTHON_BIN="${PYTHON:-python3}"
 mkdir -p logs
 "${PYTHON_BIN}" -m child_complexity_predictors validate-manifest --manifest "${MANIFEST}"
 "${PYTHON_BIN}" -m child_complexity_predictors extract --manifest "${MANIFEST}"
+"${PYTHON_BIN}" -m child_complexity_predictors trajectory --manifest "${MANIFEST}"

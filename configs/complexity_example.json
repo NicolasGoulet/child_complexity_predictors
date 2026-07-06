@@ -2,6 +2,8 @@
   "run_id": "strict_naturalistic_complexity_example",
   "input_csv": "../communicative_efficiency/data/example/child_rows.csv",
   "output_csv": "results/complexity/child_complexity_predictors.csv.gz",
+  "trajectory_output_csv": "child_complexity_trajectory.csv.gz",
+  "aggregate_output_csv": "child_complexity_age_bin_summary.csv.gz",
   "text_column": "utterance_clean",
   "id_columns": ["utterance_id"],
   "carry_columns": [
@@ -11,5 +13,9 @@
     "age_months",
     "age_bin"
   ],
-  "lowercase": true
+  "lowercase": true,
+  "child_column": "child_id",
+  "age_column": "age_months",
+  "age_bin_column": "age_bin",
+  "session_column": "session_id"
 }
