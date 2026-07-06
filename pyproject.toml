@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "child-complexity-predictors"
+version = "0.1.0"
+description = "CPU-first MLU and complexity predictors for child-language analyses."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name = "Nicolas Goulet", email = "nicolas.goulet@hec.ca"}
+]
+dependencies = []
+
+[project.scripts]
+child-complexity-predictors = "child_complexity_predictors.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
