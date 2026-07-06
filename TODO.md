@@ -14,6 +14,10 @@ are add-ons to existing information/effort analyses, not replacements.
 - [x] Keep Git limited to code, tests, docs, Slurm scripts, tiny synthetic
       fixtures, and manifest templates. Move real cleaned data and derived
       predictor exports with `rsync`.
+- [x] On Mila, keep the permanent Git checkout in `$HOME` beside the other
+      modular repos; write job outputs, temporary data, full cleaned inputs,
+      and derived predictor exports under `$SCRATCH`, then remove scratch job
+      directories after retrieval.
 - [x] Provide a Slurm script that `cd` to repo root and sets `PYTHONPATH=src`.
 - [ ] Add production manifests pointing to strict naturalistic child rows and
       any required CHAT morphology exports.

@@ -59,3 +59,8 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 
 Do not commit CHILDES data, derived full-corpus predictor tables, or large
 exports. Commit only code, tests, configs, and small documentation.
+
+On Mila, keep the permanent Git checkout in `$HOME` beside the other modular
+repos. Put production manifests, temporary files, full cleaned inputs, and
+derived predictor exports under `$SCRATCH`, then remove scratch job directories
+after outputs have been rsynced back or are no longer needed.
