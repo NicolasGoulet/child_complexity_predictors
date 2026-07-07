@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from child_complexity_predictors.big_cleaned import prepare_pbm_complexity_manifests
 from child_complexity_predictors.manifest import ComplexityManifest
 from child_complexity_predictors.predictors import predictors_for_text, run_extract
 from child_complexity_predictors.trajectory import run_trajectory
@@ -21,6 +22,59 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 
 
 class ComplexityPredictorTests(unittest.TestCase):
+    def test_prepare_pbm_complexity_manifests_from_bundle(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            bundle = root / "bundle"
+            child_dir = bundle / "preprocessed_data" / "Brown" / "Adam"
+            child_dir.mkdir(parents=True)
+            write_csv(
+                bundle / "manifest.csv",
+                [
+                    {
+                        "dataset": "Brown",
+                        "child_id": "Adam",
+                        "child_scoring_ready": "1",
+                        "child_scoring_csv": "preprocessed_data/Brown/Adam/chi.surprisal_scoring.csv",
+                    }
+                ],
+            )
+            write_csv(
+                child_dir / "chi.surprisal_scoring.csv",
+                [
+                    {
+                        "dataset": "Brown",
+                        "child_id": "Adam",
+                        "source_group": "Brown",
+                        "session_id": "1",
+                        "age_months": "27.1",
+                        "file": "Adam/a.cha",
+                        "line_no": "10",
+                        "utt_id": "1",
+                        "context_k3": "do you want milk?",
+                        "chi_utterance_clean": "more milk",
+                        "random_model_utterance_bin6": "go home",
+                        "unigram_model_utterance_bin6": "want milk",
+                        "bigram_model_utterance_bin6": "more cookie",
+                        "trigram_model_utterance_bin6": "more milk",
+                    }
+                ],
+            )
+
+            audit = prepare_pbm_complexity_manifests(
+                bundle_root=bundle,
+                output_root=root / "run",
+                run_id="unit-pbm",
+                datasets={"Brown"},
+            )
+
+            self.assertEqual(audit["real_row_count"], 1)
+            self.assertEqual(audit["candidate_row_count"], 5)
+            real_manifest = ComplexityManifest.from_path(audit["real_manifest_json"])
+            candidate_manifest = ComplexityManifest.from_path(audit["candidate_manifest_json"])
+            self.assertEqual(real_manifest.id_columns, ("row_uid",))
+            self.assertEqual(candidate_manifest.id_columns, ("row_uid", "source_model"))
+
     def test_predictors_for_text(self) -> None:
         result = predictors_for_text("More milk please!", lowercase=True)
         self.assertEqual(result["orthographic_word_count"], 3)

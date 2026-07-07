@@ -19,7 +19,7 @@ are add-ons to existing information/effort analyses, not replacements.
       and derived predictor exports under `$SCRATCH`, then remove scratch job
       directories after retrieval.
 - [x] Provide a Slurm script that `cd` to repo root and sets `PYTHONPATH=src`.
-- [ ] Add production manifests pointing to strict naturalistic child rows and
+- [x] Add production manifests pointing to strict naturalistic child rows and
       any required CHAT morphology exports.
 - [ ] Add a manifest audit command that checks required columns, duplicate row
       ids, age-bin coverage, and missing text.
@@ -57,7 +57,7 @@ are add-ons to existing information/effort analyses, not replacements.
 
 ## Real-Data Integration
 
-- [ ] Add PBM cleaned-data integration manifests using existing
+- [x] Add PBM cleaned-data integration manifests using existing
       `compute_surprisal_mila/data/{Brown,Manchester,Providence}/*/chi.csv`
       as the first real-data test layer.
 - [ ] After synthetic and PBM integration tests pass, run full

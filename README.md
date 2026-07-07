@@ -49,6 +49,18 @@ Extract predictors:
 python3 -m child_complexity_predictors extract --manifest configs/complexity_example.json
 ```
 
+Run the PBM real-data predictor job on Mila after the strict-naturalistic
+bundle has been extracted under scratch. This writes real-child MLU/lexical
+trajectories and utterance-level complexity predictors for the PBM real +
+n-gram candidate cloud.
+
+```bash
+cd "$HOME/communicative_efficiency_repos/child_complexity_predictors"
+sbatch --output="$SCRATCH/pbm-complexity-%j.out" \
+  slurm/pbm_complexity_predictors.sbatch \
+  "$SCRATCH/communicative_efficiency_data/big_cleaned_dataset/default_naturalistic_merged_006_023"
+```
+
 Run tests:
 
 ```bash
